@@ -1,0 +1,20 @@
+[Unit]
+Description=Parallel port synchronization daemon for VideoMEG
+After=network.target
+
+[Service]
+# Ensure the service runs as the root user
+User=root
+# Define the path to the executable and its arguments
+ExecStart=/opt/SyncDaemon/SyncDaemon 8200 255
+# Specify the working directory for the executable
+WorkingDirectory=/opt/SyncDaemon/
+# Use 'Type=simple' for standard daemons where the main process is the one started by ExecStart.
+Type=simple
+# Ensure the service restarts if it crashes
+Restart=on-failure
+RestartSec=5
+
+[Install]
+# Enable the service to start automatically at boot time
+WantedBy=multi-user.target
